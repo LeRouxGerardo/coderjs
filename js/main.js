@@ -4,38 +4,43 @@ alert("◄ PENALES ► --- Abrí la consola con F12 para ver marcador")
 const IZQUIERDA = 40;
 const DERECHA = 60;
 
-let golesUser = 0;
-let golesCpu = 0;
-let ventaja = 0;
-let desventaja= 0;
+const equipoUser = {
+  nombre: 'Usuario',
+  goles: 0,
+  ventaja: 0,
+  desventaja: 0,
+};
+
+const equipoCPU = {
+  nombre: 'CPU',
+  goles: 0,
+  ventaja: 0,
+  desventaja: 0,
+};
+
 let turno = 0;
 
 
 
 while (turno<5) {
 
- patea();
+  patea();
  
+  resultado();
   
-  console.log("---------o---------o---------");
-  console.log("|    Usuario: " +  golesUser + "    CPU: " + golesCpu + "    |");
-  console.log("---------o---------o---------");
 
   ataja();
   
-  console.log("---------o---------o---------");
-  console.log("|    Usuario: " +  golesUser + "    CPU: " + golesCpu + "    |");
-  console.log("---------o---------o---------");
-
+  resultado();
   
   turno++
   console.log("--------  TURNO " + turno + "   --------")
 
-  if (ventaja > (5 - turno)) {
+  if (equipoUser.ventaja > (5 - turno)) {
     console.log("¡GANASTE!");
     break;
 }
-  if(desventaja > (5 - turno)) {
+  if(equipoUser.desventaja > (5 - turno)) {
     
     console.log("...Perdiste...");
     break;
@@ -43,29 +48,22 @@ while (turno<5) {
  
 }
 
-if (golesUser === golesCpu) {
-while (golesUser === golesCpu) {
+if (equipoUser.goles === equipoCPU.goles) {
+while (equipoUser.goles === equipoCPU.goles) {
 
-  patea()
+  patea();
   
-  console.log("---------o---------o---------");
-  console.log("|    Usuario: " +  golesUser + "    CPU: " + golesCpu + "    |");
-  console.log("---------o---------o---------");
+  resultado();
  
-  ataja()
+  ataja();
 
-
-  console.log("---------o---------o---------");
-  console.log("|    Usuario: " +  golesUser + "    CPU: " + golesCpu + "    |");
-  console.log("---------o---------o---------");
+  resultado();
 }
   
 }
 
-  console.log("---------o FINAL! o---------")
-  console.log("---------o---------o---------");
-  console.log("|    Usuario: " +  golesUser + "    CPU: " + golesCpu + "    |");
-  console.log("---------o---------o---------");
+  console.log("---------o FINAL! o---------");
+  resultado();
 
 function patea () {
     let pateaUser = prompt("Tu turno de PATEAR, escribí: Izquierda, Medio o Derecha").toUpperCase();
@@ -97,9 +95,9 @@ function patea () {
         alert("...Atajo el Arquero...");
       } else {
         alert("¡GOOOOOOOOOOL!");
-        golesUser++;
-        ventaja++;
-        desventaja--;  
+        equipoUser.goles++;
+        equipoUser.ventaja++;
+        equipoUser.desventaja--;  
 
 }
 }
@@ -108,7 +106,7 @@ function patea () {
 function ataja () {
     let atajaUser = prompt("Tu turno de ATAJAR, escribí: Izquierda, Medio o Derecha").toUpperCase();
     let pateaCpu = Math.ceil(Math.random()*100);
-    
+   
     let arquero = false;
   
     if (atajaUser === 'IZQUIERDA') {
@@ -134,8 +132,14 @@ function ataja () {
       alert("¡Atajo el Arquero!");
     } else {
       alert("...GOL..."); 
-      golesCpu++;
-      ventaja--;
-      desventaja++;
+      equipoCPU.goles++;
+      equipoCPU.ventaja--;
+      equipoCPU.desventaja++;
     }
+}
+
+function resultado() {
+  console.log("---------o---------o---------");
+  console.log("|    Usuario: " +  equipoUser.goles + "    CPU: " + equipoCPU.goles + "    |");
+  console.log("---------o---------o---------");
 }
